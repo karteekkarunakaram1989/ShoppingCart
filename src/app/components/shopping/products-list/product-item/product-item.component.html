@@ -1,0 +1,54 @@
+<div class="card mb-4 shadow-sm">
+    <img class="bd-placeholder-img card-img-top" width="100%" [src]="productItem.imageUrl">
+    <div class="card-body text-center">
+        <p class="card-text">
+            <strong>{{productItem.price|currency}}</strong>
+        </p>
+        <p>{{productItem.name}}</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="col btn-group text-center">
+                <a type="button" class="btn btn-primary product-btn text-white" (click)="addToCart()">Add to Cart</a>
+                <a type="button" class="btn btn-outline-secondary product-btn" data-toggle="modal" data-target="#productDetails{{productItem.id}}" (click)="showModal=true">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="productDetails{{productItem.id}}" [ngClass]="{'show':showModal}">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">{{productItem.name}}</h4>
+                <button type="button" class="close" data-dismiss="modal" (click)="showModal=false">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <img class="bd-placeholder-img card-img-top" width="100% " [src]="productItem.imageUrl">
+                    </div>
+                    <div class="col-6 my-auto">
+                        <div class="row form-inline">
+                            <div class="col-3 text-right"><strong>Name: </strong></div>
+                            <div class="col-9" for="productItem.name ">{{productItem.name}}</div>
+                        </div>
+                        <div class="row form-inline">
+                            <div class="col-3 text-right"><strong>Description: </strong></div>
+                            <div class="col-9" for="productItem.description ">{{productItem.description}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addToCart()">Add to Cart</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

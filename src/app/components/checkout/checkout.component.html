@@ -1,0 +1,66 @@
+<h1>Checkout</h1>
+<hr>
+<h2 *ngIf="isCartEmpty()">There are no products in the basket.</h2>
+<div *ngIf="!isCartEmpty()">
+    <table class="table table-bordered text-center">
+        <thead class="thead-light">
+            <tr>
+                <th>Product</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price per Item</th>
+                <th>Total Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cartItems">
+                <td><img [src]="item.productImageUrl" height="10%" width="10%"></td>
+                <td>{{item.productName}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.price|currency}}</td>
+                <td>{{(item.quantity*item.price)|currency}}</td>
+                <td><a class="btn btn-danger btn-small text-white" (click)="removeItem(item)">&times;</a></td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Total</strong></td>
+                <td><strong>{{itemsTotal}}</strong></td>
+                <td></td>
+                <td><strong>{{priceTotal|currency}}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div class="row">
+        <div class="col-6 text-right">
+            <strong>Total Items Cost: </strong>
+        </div>
+        <div class="col">
+            {{priceTotal|currency}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-right">
+            <strong>Shipping Charges: </strong>
+        </div>
+        <div class="col">
+            {{shippingCharges|currency}}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6 text-right">
+            <strong>Total Amount to Pay: </strong>
+        </div>
+        <div class="col">
+            <strong>{{priceTotal+shippingCharges|currency}}</strong>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col text-center">
+        <button class="btn btn-primary btn-lg mr-1 text-white" (click)="placeOrder()" *ngIf="!isCartEmpty()">Place Order</button>
+        <button class="btn btn-secondary btn-lg text-white" (click)="continueShopping()">Continue Shopping</button>
+    </div>
+</div>
